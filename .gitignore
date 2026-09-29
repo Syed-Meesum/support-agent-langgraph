@@ -1,0 +1,25 @@
+# Real secrets (hitl-and-docker.md §3 commits .env.example instead)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Local Chroma vector index (rebuilt from app/rag/knowledge/*.md)
+.chroma/
+
+# Local persistence (step 6): SQLite checkpoints + the case/human-review store.
+# Both are rebuilt from a run; Postgres is used when DATABASE_URL is set.
+.data/
+*.sqlite
+
+# Frontend: dependencies and the built bundle are produced by `npm install` and
+# `npm run build` (and by the Docker build), never committed.
+node_modules/
+dist/
+npm-debug.log*
+
+# Note: backend/eval/results/latest.json IS committed on purpose - the API serves
+# it to the UI's eval tab so the repo works before anyone runs the suite.

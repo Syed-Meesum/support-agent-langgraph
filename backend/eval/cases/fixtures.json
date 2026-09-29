@@ -1,0 +1,255 @@
+{
+  "_comment": "Mocked fixture data backing the support tools. Seeded into Postgres by app/db/seed.py later; the tools read from here in the meantime. IDs are human-readable here and mapped to UUIDs at seed time.",
+  "customers": [
+    {
+      "id": "cust_1001",
+      "name": "Dana Reyes",
+      "email": "dana.reyes@example.com",
+      "tier": "pro",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1002",
+      "name": "Marcus Webb",
+      "email": "marcus.webb@example.com",
+      "tier": "standard",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1003",
+      "name": "Priya Anand",
+      "email": "priya.anand@example.com",
+      "tier": "enterprise",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1004",
+      "name": "Tom Okafor",
+      "email": "tom.okafor@example.com",
+      "tier": "standard",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1005",
+      "name": "Lena Fischer",
+      "email": "lena.fischer@example.com",
+      "tier": "pro",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1006",
+      "name": "Sam Ruiz",
+      "email": "sam.ruiz@example.com",
+      "tier": "standard",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1007",
+      "name": "Nadia Haddad",
+      "email": "nadia.haddad@example.com",
+      "tier": "standard",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1008",
+      "name": "Owen Blake",
+      "email": "owen.blake@example.com",
+      "tier": "pro",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1009",
+      "name": "Ines Duarte",
+      "email": "ines.duarte@example.com",
+      "tier": "pro",
+      "account_status": "active"
+    },
+    {
+      "id": "cust_1010",
+      "name": "Ravi Menon",
+      "email": "ravi.menon@example.com",
+      "tier": "standard",
+      "account_status": "active"
+    }
+  ],
+  "charges": [
+    {
+      "id": "ch_5001",
+      "customer_id": "cust_1001",
+      "amount": "29.99",
+      "status": "succeeded",
+      "created_at": "2026-03-04T09:12:00Z",
+      "order_id": "ord_7781"
+    },
+    {
+      "id": "ch_5002",
+      "customer_id": "cust_1001",
+      "amount": "29.99",
+      "status": "succeeded",
+      "created_at": "2026-03-04T09:14:35Z",
+      "order_id": "ord_7781"
+    },
+    {
+      "id": "ch_5003",
+      "customer_id": "cust_1001",
+      "amount": "29.99",
+      "status": "failed",
+      "created_at": "2026-03-04T09:15:02Z",
+      "order_id": "ord_7781"
+    },
+    {
+      "id": "ch_5010",
+      "customer_id": "cust_1002",
+      "amount": "15.00",
+      "status": "succeeded",
+      "created_at": "2026-03-01T18:45:00Z",
+      "order_id": "ord_7790"
+    },
+    {
+      "id": "ch_5020",
+      "customer_id": "cust_1003",
+      "amount": "600.00",
+      "status": "succeeded",
+      "created_at": "2026-02-27T11:05:00Z",
+      "order_id": "ord_7801"
+    },
+    {
+      "id": "ch_5021",
+      "customer_id": "cust_1003",
+      "amount": "600.00",
+      "status": "succeeded",
+      "created_at": "2026-02-27T11:06:12Z",
+      "order_id": "ord_7801"
+    },
+    {
+      "id": "ch_5030",
+      "customer_id": "cust_1004",
+      "amount": "42.00",
+      "status": "succeeded",
+      "created_at": "2026-02-20T08:00:00Z",
+      "order_id": "ord_7811"
+    },
+    {
+      "id": "ch_5040",
+      "customer_id": "cust_1005",
+      "amount": "29.99",
+      "status": "succeeded",
+      "created_at": "2026-03-02T07:30:00Z",
+      "order_id": "ord_7820"
+    },
+    {
+      "id": "ch_5050",
+      "customer_id": "cust_1006",
+      "amount": "12.00",
+      "status": "succeeded",
+      "created_at": "2026-03-03T13:00:00Z",
+      "order_id": "ord_7830"
+    },
+    {
+      "id": "ch_5060",
+      "customer_id": "cust_1008",
+      "amount": "49.99",
+      "status": "succeeded",
+      "created_at": "2026-03-05T10:00:00Z",
+      "order_id": "ord_7840"
+    },
+    {
+      "id": "ch_5061",
+      "customer_id": "cust_1008",
+      "amount": "49.99",
+      "status": "succeeded",
+      "created_at": "2026-03-05T10:02:41Z",
+      "order_id": "ord_7840"
+    },
+    {
+      "id": "ch_5070",
+      "customer_id": "cust_1009",
+      "amount": "50.01",
+      "status": "succeeded",
+      "created_at": "2026-03-06T10:00:00Z",
+      "order_id": "ord_7850"
+    },
+    {
+      "id": "ch_5071",
+      "customer_id": "cust_1009",
+      "amount": "50.01",
+      "status": "succeeded",
+      "created_at": "2026-03-06T10:01:55Z",
+      "order_id": "ord_7850"
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": "sub_9001",
+      "customer_id": "cust_1001",
+      "plan": "Pro Monthly",
+      "status": "active",
+      "price": "29.99",
+      "renewal_date": "2026-04-04"
+    },
+    {
+      "id": "sub_9002",
+      "customer_id": "cust_1002",
+      "plan": "Starter Monthly",
+      "status": "active",
+      "price": "15.00",
+      "renewal_date": "2026-04-01"
+    },
+    {
+      "id": "sub_9003",
+      "customer_id": "cust_1003",
+      "plan": "Enterprise Annual",
+      "status": "active",
+      "price": "600.00",
+      "renewal_date": "2027-02-27"
+    },
+    {
+      "id": "sub_9004",
+      "customer_id": "cust_1004",
+      "plan": "Starter Monthly",
+      "status": "active",
+      "price": "42.00",
+      "renewal_date": "2026-03-20"
+    },
+    {
+      "id": "sub_9005",
+      "customer_id": "cust_1005",
+      "plan": "Pro Monthly",
+      "status": "active",
+      "price": "29.99",
+      "renewal_date": "2026-04-02"
+    },
+    {
+      "id": "sub_9006",
+      "customer_id": "cust_1006",
+      "plan": "Starter Monthly",
+      "status": "active",
+      "price": "12.00",
+      "renewal_date": "2026-04-03"
+    },
+    {
+      "id": "sub_9008",
+      "customer_id": "cust_1008",
+      "plan": "Pro Monthly",
+      "status": "active",
+      "price": "49.99",
+      "renewal_date": "2026-04-05"
+    },
+    {
+      "id": "sub_9009",
+      "customer_id": "cust_1009",
+      "plan": "Pro Monthly",
+      "status": "active",
+      "price": "50.01",
+      "renewal_date": "2026-04-06"
+    },
+    {
+      "id": "sub_9010",
+      "customer_id": "cust_1010",
+      "plan": "Starter Monthly",
+      "status": "past_due",
+      "price": "29.99",
+      "renewal_date": "2026-03-28"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+# Policy rules for the support agent. Deterministic config, read by
+# app/policy/engine.py. Plain code, no LLM involvement - see policy-and-eval.md §1.
+
+refund_auto_approve_max: 50.00     # auto-approved if evidence supports it
+refund_human_review_max: 500.00    # above auto-approve, below this = human review
+# above 500 = mandatory human review, no exceptions
+
+cancellation_requires_confirmation: true  # always confirm before executing
+
+min_confidence_threshold: 0.80
+angry_sentiment_escalates: true
+policy_exception_escalates: true   # no matching rule = escalate, never improvise

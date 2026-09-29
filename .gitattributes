@@ -1,0 +1,8 @@
+# Normalise line endings so the repo is byte-identical wherever it is cloned.
+# Without this, a Windows checkout rewrites every line of every file and the
+# diffs stop meaning anything.
+* text=auto eol=lf
+
+# Keep these out of language stats and diffs.
+package-lock.json -diff linguist-generated
+backend/eval/results/latest.json -diff

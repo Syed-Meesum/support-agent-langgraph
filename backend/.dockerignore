@@ -1,0 +1,11 @@
+# Nothing local or secret belongs in the image. The real .env is read by Docker
+# Compose from the repo root and passed as environment variables instead
+# (hitl-and-docker.md §3), so it must never be baked in.
+.env
+.venv/
+.data/
+.chroma/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+*.sqlite

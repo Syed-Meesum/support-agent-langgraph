@@ -1,0 +1,48 @@
+# `docker compose up --build`, then open http://localhost:3000
+#
+# Secrets come from the repo-root `.env` (copy `.env.example`). Compose reads that
+# file for its own `${VAR}` substitutions, and the backend container reads the
+# same file when it runs outside Docker - one secrets file, not two.
+#
+# No database container: the documented production backend is a hosted Supabase
+# Postgres. With DATABASE_URL blank the app uses local SQLite inside the
+# `agent-data` volume, so a clone runs with nothing but an Anthropic API key.
+
+name: support-agent
+
+services:
+  backend:
+    build: ./backend
+    image: support-agent-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # `:-` defaults keep a blank or missing .env entry from breaking startup.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-5}
+      DATABASE_URL: ${DATABASE_URL:-}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY:-}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING:-false}
+      # Pin the local fallbacks inside the container's writable volume, rather
+      # than letting them resolve relative to the image's WORKDIR.
+      CHECKPOINT_PATH: /app/.data/checkpoints.sqlite
+      CASE_DB_PATH: /app/.data/cases.sqlite
+      CHROMA_PATH: /app/.chroma
+    volumes:
+      # Cases and the human-review queue survive a rebuild. The Chroma index is
+      # deliberately not a volume: it is built into the image at build time.
+      - agent-data:/app/.data
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    image: support-agent-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  agent-data:

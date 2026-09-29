@@ -1,0 +1,7 @@
+# The image installs its own dependencies with `npm ci`, and nginx serves the
+# bundle built inside the image - neither of these belongs in the build context.
+node_modules/
+dist/
+npm-debug.log*
+.env
+.env.*
