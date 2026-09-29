@@ -1,4 +1,4 @@
--- The documented Postgres/Supabase schema (hitl-and-docker.md §2).
+-- The documented Postgres/Supabase schema.
 --
 -- This is the native form to run in the Supabase SQL editor when you point the
 -- project at Postgres via DATABASE_URL. You do NOT need to run it for the local
@@ -10,7 +10,8 @@
 --
 -- Deviation from the doc's DDL: ids are `text`, not `uuid`. The fixture data uses
 -- readable ids (`cust_1001`, `ch_5001`), and `app/db/seed.py` will insert those
--- same rows, so a `uuid` column would not accept them. Documented in PROGRESS.md.
+-- same rows, so a `uuid` column would not accept them (see README.md,
+-- "Assumptions and judgement calls").
 
 create extension if not exists vector;
 
@@ -50,7 +51,7 @@ create table if not exists cases (
     customer_message text,
     escalation_reason text,
     case_brief jsonb,
-    state_snapshot jsonb not null,     -- the whole CaseState (architecture.md §5)
+    state_snapshot jsonb not null,     -- the whole CaseState the graph runs on
     created_at timestamptz not null default now(),
     updated_at timestamptz not null default now()
 );

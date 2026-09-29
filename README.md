@@ -147,14 +147,31 @@ test pins it.
 
 Seven nodes and nine edges, in `backend/app/graph/`:
 
+```mermaid
+flowchart TD
+    START([case opens]) --> router
+    router --> investigate
+    investigate --> decide
+    decide --> policy_check
+    policy_check -- "approved" --> verify
+    policy_check -- "rejected / requires_human" --> act_or_escalate
+    verify -- "verified" --> act_or_escalate
+    verify -- "not verified" --> act_or_escalate
+    act_or_escalate --> respond
+    respond --> finish([reply sent])
+
+    classDef llm fill:#e8f0fe,stroke:#4a7fd4,color:#12233f
+    classDef gate fill:#fde8e8,stroke:#c0392b,stroke-width:2px,color:#3f1212
+    classDef executor fill:#e6f4ea,stroke:#2e7d32,stroke-width:2px,color:#12331a
+    class router,investigate,decide,verify,respond llm
+    class policy_check gate
+    class act_or_escalate executor
 ```
-router → investigate → decide → policy_check
-policy_check --approved--> verify
-policy_check --rejected / requires_human--> act_or_escalate   (escalation path)
-verify --verified-->            act_or_escalate               (action path)
-verify --not verified-->        act_or_escalate               (escalation path)
-act_or_escalate → respond → END
-```
+
+Blue = the five nodes that may call the model. **Red = `policy_check`, the gate:
+no LLM.** Green = `act_or_escalate`, the only node that can move money or pause a
+case — also no LLM. It has exactly two ways in, both drawn above, and a test
+asserts that edge set.
 
 | Node | LLM? | What it does |
 |---|---|---|
@@ -170,6 +187,33 @@ act_or_escalate → respond → END
 
 This is the answer to "how do you trust an LLM with money", and it is enforced
 structurally rather than promised:
+
+```mermaid
+flowchart LR
+    A["Model<br/>proposes"] --> B{"policy_check<br/>NO LLM"}
+    B -- "allowed" --> C["verify<br/>evidence check"]
+    B -- "not allowed" --> D["Escalate"]
+    C -- "supported" --> E["act_or_escalate<br/>NO LLM"]
+    C -- "not supported" --> D
+    D --> F["Pause: checkpoint<br/>is the pause"]
+    F --> G{"Human<br/>review"}
+    G -- "approve" --> E
+    G -- "reject" --> H["Nothing executes"]
+    E --> I["Action / reply"]
+    H --> I
+
+    classDef llm fill:#e8f0fe,stroke:#4a7fd4,color:#12233f
+    classDef gate fill:#fde8e8,stroke:#c0392b,stroke-width:2px,color:#3f1212
+    classDef human fill:#fff4e0,stroke:#b7791f,color:#3f2d12
+    class A,C llm
+    class B,E gate
+    class F,G,H human
+```
+
+The blue steps are the only ones that may call a model; the red ones contain no
+LLM at all; the amber path is where a person enters. The one arrow that can
+override the red gate comes only from `G` — a human approval, written by the review
+service (`app/graph/hitl.py`), never by a node.
 
 - **`policy_check` and `act_or_escalate` take no `llm` parameter at all.** A test
   asserts that by introspection, so the executor cannot acquire a model by accident.

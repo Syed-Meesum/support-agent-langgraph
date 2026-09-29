@@ -1,5 +1,5 @@
 # Policy rules for the support agent. Deterministic config, read by
-# app/policy/engine.py. Plain code, no LLM involvement - see policy-and-eval.md §1.
+# app/policy/engine.py. Plain code, no LLM involvement.
 
 refund_auto_approve_max: 50.00     # auto-approved if evidence supports it
 refund_human_review_max: 500.00    # above auto-approve, below this = human review

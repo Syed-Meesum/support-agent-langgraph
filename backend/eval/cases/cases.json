@@ -1,6 +1,6 @@
 {
   "_comment": [
-    "The eval dataset (policy-and-eval.md §2). Every case declares the outcome it",
+    "The eval dataset. Every case declares the outcome it",
     "expects, and eval/runner.py compares the graph's real behaviour against it.",
     "",
     "Required fields:",
@@ -32,7 +32,7 @@
   "cases": [
     {
       "id": "dup_29_99_auto_approved",
-      "scenario_name": "Duplicate $29.99 charge, the demo case from architecture.md §4",
+      "scenario_name": "Duplicate $29.99 charge, the headline demo case",
       "input_message": "I was charged twice for my $29.99 subscription this month, please refund me.",
       "seed_data": { "customer_id": "cust_1001" },
       "expected_action": ["refund", "partial_refund"],
@@ -655,7 +655,7 @@
       "expected_rule_id": "refund_human_review",
       "expected_escalation": true,
       "adversarial": false,
-      "why": "hitl-and-docker.md's own ask: proves the pause is real. eval/runner.py --hitl then approves it and checks the refund actually executed.",
+      "why": "Proves the pause is real. eval/runner.py --hitl then approves it and checks the refund actually executed.",
       "scripted": {
         "category": "refund", "sentiment": "neutral", "confidence": 0.95,
         "action": "refund", "amount": "50.01", "charge_id": "ch_5071",

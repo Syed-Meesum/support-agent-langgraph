@@ -3,8 +3,8 @@
   "mode": "offline",
   "judge": "amount-grounding (deterministic)",
   "model": null,
-  "started_at": "2026-09-29T12:45:43.203114+00:00",
-  "completed_at": "2026-09-29T12:45:58.043030+00:00",
+  "started_at": "2026-09-29T14:46:45.066577+00:00",
+  "completed_at": "2026-09-29T14:47:28.758697+00:00",
   "metrics": {
     "resolution_rate": 1.0,
     "policy_compliance": 1.0,
@@ -26,7 +26,7 @@
   "results": [
     {
       "case_id": "dup_29_99_auto_approved",
-      "scenario_name": "Duplicate $29.99 charge, the demo case from architecture.md §4",
+      "scenario_name": "Duplicate $29.99 charge, the headline demo case",
       "adversarial": false,
       "expected_escalation": false,
       "expected_action": [
